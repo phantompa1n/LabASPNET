@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Menu";
+}
+
+
+    <h1>Добро пожаловать! @ViewBag.login</h1>
+    <div class="mainContainer">
+        <img src="~/Content/Images/пятнашки.png" sizes="20%">
+        <form action="/Home/ChooseDifficult/">
+            <button id="play">
+                Играть
+            </button>
+        </form>
+
+        <form action="/Home/Reg/">
+            <button id="record">
+                Рекорды
+            </button>
+        </form>
+
+        <form action="/Home/Reg/">
+            <button id="description">
+                Правила
+            </button>
+        </form>
+
+        <form action="/Home/Index/">
+            <button id="exit">
+                Выход
+            </button>
+        </form>
+    </div>
+

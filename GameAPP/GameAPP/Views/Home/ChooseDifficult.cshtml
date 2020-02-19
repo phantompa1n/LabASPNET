@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "ChooseDifficult";
+}
+
+<div class="chooseContainer">
+    <button id="registration" onclick="document.location='@Url.Action("Field","Home", new { size = 3 })'">
+        3x3
+    </button>
+
+    <button id="record" onclick="document.location='@Url.Action("Field","Home", new { size = 4 })'">
+        4x4
+    </button>
+    <button id="description" onclick="document.location='@Url.Action("Field","Home", new { size = 5 })'">
+        5x5
+    </button>
+</div>

@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Field";
+}
+
+<div class="gameContainer">
+    <table cellspacing="0" cellpadding="0">
+        @{
+            int s = 1;
+            for (int i = ViewBag.size; i > 0; i--)
+            {
+                <tr>
+                    @for (int j = ViewBag.size; j > 0; j--)
+                    {
+                        <td id="@s" class="cellsGame">
+                            <img id="@s" src=@GetSomeString() onclick="move_cell()">
+                        </td>
+                        s++;
+                    }
+                </tr>
+            }
+        }
+
+    </table>
+</div>
+<div class="counterContainer">
+    <p></p>
+</div>
+
+
+
+@functions{
+    public string GetSomeString()
+    {
+        return string.Empty;
+    }
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+        function move_cell(event) {
+            var id = event.target.id;
+            var cellsM = document.getElementsByClassName('cellsGame');
+
+            var idEmptyCells = cellsM.forEach(function (cell) {
+                if (cell.firstElementChild.id == null)
+                    return cell;
+            });
+        }
+        function search
+    </script>
+}
