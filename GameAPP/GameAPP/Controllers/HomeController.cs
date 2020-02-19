@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -52,6 +53,20 @@ namespace GameAPP.Controllers
         {
             ViewBag.size = size;
             return View(ViewBag);
+        }
+
+
+        public static int getRandomPictures(int size)
+        {
+            //Thread.Sleep(100);
+            int time = Convert.ToInt32(DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString());
+            Random rnd = new Random(time);
+            return rnd.Next(2, size * size);
+        }
+        public static int getRandomCars()
+        {
+            Random rnd = new Random();
+            return rnd.Next(1, 5); 
         }
 
         protected void cellClick(object sender, EventArgs e)

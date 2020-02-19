@@ -144,8 +144,42 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Images\Cars1\1.1.png" />
-    <Content Include="Content\Images\Cars1\1.png" />
+    <Content Include="Content\Images\3\Cars1\1.png" />
+    <Content Include="Content\Images\3\Cars1\2.png" />
+    <Content Include="Content\Images\3\Cars1\3.png" />
+    <Content Include="Content\Images\3\Cars1\4.png" />
+    <Content Include="Content\Images\3\Cars1\5.png" />
+    <Content Include="Content\Images\3\Cars1\6.png" />
+    <Content Include="Content\Images\3\Cars1\7.png" />
+    <Content Include="Content\Images\3\Cars1\8.png" />
+    <Content Include="Content\Images\3\Cars1\9.png" />
+    <Content Include="Content\Images\3\Cars2\1.png" />
+    <Content Include="Content\Images\3\Cars2\2.png" />
+    <Content Include="Content\Images\3\Cars2\3.png" />
+    <Content Include="Content\Images\3\Cars2\4.png" />
+    <Content Include="Content\Images\3\Cars2\5.png" />
+    <Content Include="Content\Images\3\Cars2\6.png" />
+    <Content Include="Content\Images\3\Cars2\7.png" />
+    <Content Include="Content\Images\3\Cars2\8.png" />
+    <Content Include="Content\Images\3\Cars2\9.png" />
+    <Content Include="Content\Images\3\Cars3\1.png" />
+    <Content Include="Content\Images\3\Cars3\2.png" />
+    <Content Include="Content\Images\3\Cars3\3.png" />
+    <Content Include="Content\Images\3\Cars3\4.png" />
+    <Content Include="Content\Images\3\Cars3\5.png" />
+    <Content Include="Content\Images\3\Cars3\6.png" />
+    <Content Include="Content\Images\3\Cars3\7.png" />
+    <Content Include="Content\Images\3\Cars3\8.png" />
+    <Content Include="Content\Images\3\Cars3\9.png" />
+    <Content Include="Content\Images\3\Cars4\1.png" />
+    <Content Include="Content\Images\3\Cars4\2.png" />
+    <Content Include="Content\Images\3\Cars4\3.png" />
+    <Content Include="Content\Images\3\Cars4\4.png" />
+    <Content Include="Content\Images\3\Cars4\5.png" />
+    <Content Include="Content\Images\3\Cars4\6.png" />
+    <Content Include="Content\Images\3\Cars4\7.png" />
+    <Content Include="Content\Images\3\Cars4\8.png" />
+    <Content Include="Content\Images\3\Cars4\9.png" />
     <Content Include="Content\Images\пятнашки.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -186,6 +220,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\3\Cars5\" />
+    <Folder Include="Content\Images\4\Cars1\" />
+    <Folder Include="Content\Images\4\Cars2\" />
+    <Folder Include="Content\Images\4\Cars3\" />
+    <Folder Include="Content\Images\4\Cars4\" />
+    <Folder Include="Content\Images\4\Cars5\" />
+    <Folder Include="Content\Images\5\Cars1\" />
+    <Folder Include="Content\Images\5\Cars2\" />
+    <Folder Include="Content\Images\5\Cars3\" />
+    <Folder Include="Content\Images\5\Cars4\" />
+    <Folder Include="Content\Images\5\Cars5\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

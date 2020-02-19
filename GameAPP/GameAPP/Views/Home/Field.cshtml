@@ -1,4 +1,4 @@
-﻿
+﻿@using  GameAPP.Controllers
 @{
     ViewBag.Title = "Field";
 }
@@ -7,16 +7,18 @@
     <table cellspacing="0" cellpadding="0">
         @{
             int s = 1;
+            string path = "/Content/Images/" + Convert.ToString(ViewBag.size) + "/Cars" + HomeController.getRandomCars() + "/";
             for (int i = ViewBag.size; i > 0; i--)
             {
                 <tr>
-                    @for (int j = ViewBag.size; j > 0; j--)
-                    {
-                        <td id="@s" class="cellsGame">
-                            <img id="@s" src=@GetSomeString() onclick="move_cell()">
-                        </td>
-                        s++;
-                    }
+                        @for (int j = ViewBag.size; j > 0; j--)
+                        {
+                            string randomPath = path + HomeController.getRandomPictures(ViewBag.size) + ".png";
+                            <td id="@s" class="cellsGame">
+                                <img id="@s" src=@randomPath onclick="move_cell()">
+                            </td>
+                            s++;
+                        }
                 </tr>
             }
         }
@@ -27,14 +29,6 @@
     <p></p>
 </div>
 
-
-
-@functions{
-    public string GetSomeString()
-    {
-        return string.Empty;
-    }
-}
 
 @section Scripts
 {
