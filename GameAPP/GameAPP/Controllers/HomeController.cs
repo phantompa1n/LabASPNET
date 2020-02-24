@@ -75,6 +75,7 @@ namespace GameAPP.Controllers
             }
             return pole;
         }
+
         static bool NumberOnPole(int[] pole, int th)
         {
             foreach (int p in pole)
@@ -86,11 +87,14 @@ namespace GameAPP.Controllers
         }
         public static bool WinPole(int[] pole)
         {
-            int count = 1;
-            for (int i = 0; i < pole.Length - 1; i++)
+            int count = 0;
+            for (int i = 0; i < pole.Length; i++)
             {
-                if (pole[i] > pole[i + 1])
-                    count++;
+                for (int j = i; j < pole.Length; j++)
+                {
+                    if (pole[j] < pole[i])
+                        count++;                   
+                }
             }
             if (count % 2 == 0)
                 return true;
@@ -99,7 +103,7 @@ namespace GameAPP.Controllers
         public static int getRandomCars()
         {
             Random rnd = new Random();
-            return rnd.Next(1, 5); 
+            return rnd.Next(1, 6); 
         }
 
         protected void cellClick(object sender, EventArgs e)

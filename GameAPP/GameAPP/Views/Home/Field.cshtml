@@ -3,50 +3,123 @@
     ViewBag.Title = "Field";
 }
 
-<div class="gameContainer">
-    <table cellspacing="0" cellpadding="0">
-        @{
-                    int s = 1;
-                    string path = "/Content/Images/" + Convert.ToString(ViewBag.size) + "/Cars" + HomeController.getRandomCars() + "/";
-                    int[] pole = new int[ViewBag.size * ViewBag.size];
-                    while (!HomeController.WinPole(pole))
+    <div class="gameContainer">
+        <table id ="field" cellspacing="0" cellpadding="0">
+            @{
+                int s = 1;
+                string numberCars = Convert.ToString(HomeController.getRandomCars());
+                string path = "/Content/Images/" + Convert.ToString(ViewBag.size) + "/Cars" + numberCars + "/";
+                int[] pole = new int[ViewBag.size * ViewBag.size];
+                while (true)
+                {
+                    pole = HomeController.getRandomPictures(ViewBag.size);
+                    if (HomeController.WinPole(pole))
                     {
-                        pole = HomeController.getRandomPictures(ViewBag.size);
+                        break;
                     }
-                    for (int i = 0; i < ViewBag.size; i++)
-                    {
-                        <tr>
+                }
+                for (int i = 0; i < ViewBag.size; i++)
+                {
+                    <tr>
                         @for (int j = 0; j < ViewBag.size; j++)
                         {
-                        string randomPath = path + pole[s - 1] + ".png";
+                            string randomPath = path + pole[s - 1] + ".png";
                             <td id="@s" class="cellsGame">
-                                <img id="@s" src=@randomPath onclick="move_cell()">
+                                <img id="@pole[s - 1]" class="carsImg" src=@randomPath onclick="move_cell(event)">
                             </td>
                             s++;
+                        }
+                    </tr>
+                }
             }
-                </tr>
-            }
-        }
+        </table>
+        <div class="counterContainer">
+            <p id="inputCount">Cделано ходов: 0</p>
+        </div>
+    </div>
 
-    </table>
-</div>
-<div class="counterContainer">
-    <p></p>
-</div>
 
 
 @section Scripts
 {
-    <script type="text/javascript">
-        function move_cell(event) {
-            var id = event.target.id;
-            var cellsM = document.getElementsByClassName('cellsGame');
-
-            var idEmptyCells = cellsM.forEach(function (cell) {
-                if (cell.firstElementChild.id == null)
-                    return cell;
-            });
+<script type="text/javascript">
+    var score = 0;
+    function move_cell(event) {
+        var clickedCell = event.target.parentElement;
+        var idPress = clickedCell.id;
+        var cellsM = document.getElementsByClassName('cellsGame');
+        var img = event.target;
+        cellsM = Array.prototype.slice.call(cellsM);
+        var EmptyCells = cellsM.filter(function (cell) {
+            return cell.firstElementChild.id == 1;
+        });
+        if (OnClick(@ViewBag.size, idPress, EmptyCells[0].id))
+        {
+            score++;
+            var counter = document.getElementById("inputCount");
+            counter.innerText = "Cделано ходов: " + score;
+            var imgEmptyCell = EmptyCells[0].firstElementChild;
+            clickedCell.appendChild(imgEmptyCell);
+            EmptyCells[0].appendChild(img);
+            //EmptyCells[0].removeChild(imgEmptyCell);
+            //clickedCell.removeChild(img);
+            var pole = document.getElementsByClassName("carsImg"); // получаем поле, т.е все картинки
+            console.log(checkWin(pole));
+            if (checkWin(pole))
+                win();
         }
-        function search
+    }
+            
+    function OnClick(size, clickButton, voidButton)//размер поля, нажатая ячейка, ячейка с пустой клеткой
+    {
+        var pole = [parseInt(clickButton) - parseInt(size), parseInt(clickButton) + parseInt(size), parseInt(clickButton) - parseInt(1), parseInt(clickButton) + parseInt(1)];
+        for (let i = 0; i < 2; i++)
+        {
+            if (pole[i] == voidButton)
+                return true;
+        }
+        for (let i = 2; i < 4; i++)
+        {
+            if (pole[i] == voidButton && (parseInt((clickButton - 1) / size)) == (parseInt((voidButton - 1) / size)))
+                return true;
+        }
+        return false;
+     }
+
+    
+    function checkWin(pole)
+    {
+        for (let i = 0; i < pole.length; i++)
+        {
+            if (parseInt(pole[i].id) != i + 1)
+                return false;
+        }
+        return true;
+    }
+
+    function win()
+    {
+        var audio = new Audio();
+        audio.src = '/Content/Songs/You_Win.mp3';
+        audio.autoplay = true;
+        var field = document.getElementsByClassName("gameContainer");
+        var img = document.createElement("img");
+        //var counterContainer = document.getElementsByClassName("counterContainer");
+        //var copycounterContainer = counterContainer[0];
+        //field[0].removeChild(counterContainer[0]);
+        //field[0].appendChild(copycounterContainer);
+        img.src = "/Content/Images/FullCars/" + @numberCars + ".png";
+        var table = field[0].firstElementChild;
+        field[0].insertBefore(img, field[0].firstElementChild);
+        field[0].removeChild(table);
+        var exitButton = document.createElement('button');
+        exitButton.innerText = 'В меню';
+        exitButton.setAttribute('onclick', "window.location.href='/Home/Menu'");
+        exitButton.id = 'mainMenu';
+        var controlDiv = document.getElementsByClassName("counterContainer");
+        controlDiv[0].appendChild(exitButton);
+    }
+
+
     </script>
 }
