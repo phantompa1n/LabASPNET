@@ -55,6 +55,16 @@ namespace GameAPP.Controllers
             return View(ViewBag);
         }
 
+        public ActionResult Rules()
+        {
+            return View();
+        }
+
+        public ActionResult Record()
+        {
+            return View();
+        }
+
 
         public static int[] getRandomPictures(int size)
         {

@@ -3,32 +3,30 @@
     ViewBag.Title = "Menu";
 }
 
-
-    <h1>Добро пожаловать! @ViewBag.login</h1>
     <div class="mainContainer">
+        <p id="authorizedLogin">Добро пожаловать: qwertyuio @ViewBag.login</p>
         <img src="~/Content/Images/пятнашки.png" sizes="20%">
-        <form action="/Home/ChooseDifficult/">
-            <button id="play">
-                Играть
-            </button>
-        </form>
 
-        <form action="/Home/Reg/">
-            <button id="record">
-                Рекорды
-            </button>
-        </form>
+        <button id="play" onclick="document.location='@Url.Action("ChooseDifficult")'">
+            Играть
+        </button>
 
-        <form action="/Home/Reg/">
-            <button id="description">
-                Правила
-            </button>
-        </form>
+        <button id="record" onclick="document.location='@Url.Action("Record")'">
+            Рекорды
+        </button>
 
-        <form action="/Home/Index/">
+        <button id="description" onclick="document.location='@Url.Action("Rules")'">
+            Правила
+        </button>
+
+        <button id="exit" onclick="document.location='@Url.Action("Index")'">
+            Выход
+        </button>
+
+        @*<form action="/Home/Index/">
             <button id="exit">
                 Выход
             </button>
-        </form>
+        </form>*@
     </div>
 

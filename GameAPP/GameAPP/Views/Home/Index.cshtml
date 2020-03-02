@@ -3,34 +3,25 @@
 }
 
     <div class="mainContainer">
+
         <img src="~/Content/Images/пятнашки.png" sizes="20%">
-                        <form action="/Home/Auth/">
-                            <button id="authorize">
-                                Вход
-                            </button>
-                        </form>
 
+       <button id="authorize" onclick="document.location='@Url.Action("Auth")'">
+            Вход
+       </button>
 
-                        <form action="/Home/Reg/">
-                            <button id="registration">
-                                Регистрация
-                            </button>
-                        </form>
+       <button id="registration" onclick="document.location='@Url.Action("Reg")'">
+            Регистрация
+       </button>
 
+       <button id="record" onclick="document.location='@Url.Action("Reg")'">
+            Рекорды
+       </button>
 
-                        <form action="/Home/Reg/">
-                            <button id="record">
-                                Рекорды
-                            </button>
-                        </form>
+       <button id="description" onclick="document.location='@Url.Action("Rules")'">
+            Правила
+       </button>
 
-
-
-                        <form action="/Home/Reg/">
-                            <button id="description">
-                                Правила
-                            </button>
-                        </form>
-        </div>
+    </div>
 
 
