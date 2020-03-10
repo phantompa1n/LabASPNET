@@ -6,15 +6,15 @@
 
         <img src="~/Content/Images/пятнашки.png" sizes="20%">
 
-       <button id="authorize" onclick="document.location='@Url.Action("Auth")'">
+       <button id="authorize" onclick="document.location='@Url.Action("Login", "Auth")'">
             Вход
        </button>
 
-       <button id="registration" onclick="document.location='@Url.Action("Reg")'">
+       <button id="registration" onclick="document.location='@Url.Action("Register", "Auth")'">
             Регистрация
        </button>
 
-       <button id="record" onclick="document.location='@Url.Action("Reg")'">
+       <button id="record" onclick="document.location='@Url.Action("Record")'">
             Рекорды
        </button>
 

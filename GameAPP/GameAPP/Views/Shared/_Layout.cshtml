@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title – приложение ASP.NET</title>
     @Styles.Render("~/Content/css")
-
+    @Scripts.Render("~/bundles/jquery")
     <style type="text/css">
     @@font-face {
         font-family: "Roboto";
@@ -37,8 +37,6 @@
     @*<div class="container body-content">
             @RenderBody()
         </div>*@
-    @Scripts.Render("~/bundles/jquery")
-    <script src='~/Scripts/jquery.unobtrusive-ajax.js'></script>
     @RenderBody()
     @RenderSection("scripts", required: false)
 </body>

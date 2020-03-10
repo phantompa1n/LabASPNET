@@ -5,54 +5,50 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace GameAPP.Controllers
 {
     public class HomeController : Controller
     {
-        GameContext db = new GameContext();
+        DbFifteenContext db = new DbFifteenContext();
 
         [HttpGet]
         public ActionResult Index()
         {
-            var players = db.Players;
-            ViewBag.Players = players;
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.Login = User.Identity.Name;
+                return RedirectToAction("Menu", "Home");
+            }
             return View();
         }
 
         [HttpGet]
-        public ActionResult Auth()
-        {
-            return View();
-        }
-
-
-        [HttpPost]
-        public ActionResult Auth(string Login, string Password)
-        {
-            if (Login == "vasya")
-                return View("Menu");
-            else
-                return null;
-        }
-
-        [HttpGet]
-        public ActionResult Reg()
-        {
-            return View();
-        }
-
-        [HttpGet]
+        [Authorize]
         public ActionResult ChooseDifficult()
         {
             return View();
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Field(int size)
         {
             ViewBag.size = size;
             return View(ViewBag);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public void Field(string record,string size)
+        {
+                int idPlayer = db.Players.FirstOrDefault(p => p.Login == User.Identity.Name).Id;
+                if (Convert.ToInt32(record) != 0)
+                {
+                    db.Records.Add(new Record { Player_Id = idPlayer, Size_field = Convert.ToInt32(size), Step_count = Convert.ToInt32(record) });
+                    db.SaveChanges();
+                }
         }
 
         public ActionResult Rules()
@@ -68,10 +64,8 @@ namespace GameAPP.Controllers
 
         public static int[] getRandomPictures(int size)
         {
-            //Thread.Sleep(100);
             int[] pole = new int[size * size];
             pole[0] = 1;
-            //int time = Convert.ToInt32(DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString());
             Random rnd = new Random();//(time);
             for (int i = 1; i < size * size; i++)
             {
@@ -95,6 +89,7 @@ namespace GameAPP.Controllers
             }
             return false;
         }
+
         public static bool WinPole(int[] pole)
         {
             int count = 0;
@@ -110,6 +105,37 @@ namespace GameAPP.Controllers
                 return true;
             return false;
         }
+
+        [HttpPost]
+        public ActionResult GetRecord(int action)
+        {
+            var players = db.Players;
+            var records = db.Records;
+            ViewBag.size = action;
+            string[] allRecords = getRecords(action,ref players, ref records);
+            if (allRecords == null)
+                return View("");
+            else
+                return View(allRecords.ToList());
+        }
+
+        string[] getRecords(int size,ref DbSet<Player> Players, ref DbSet<Record> Records)
+        {
+            string records = null;
+            foreach (var k in Records)
+            {
+                if (k.Size_field == size)
+                {
+                    IEnumerable<dynamic> players = Players;
+                    records += players.FirstOrDefault(p => p.Id == k.Player_Id).Login + "   " + k.Step_count + "\n";
+                }
+            }
+            if (records == null)
+                return null;
+            string[] allRecords = records.Split('\n');
+            return allRecords;
+        }
+
         public static int getRandomCars()
         {
             Random rnd = new Random();
@@ -122,10 +148,14 @@ namespace GameAPP.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Menu()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.Login = User.Identity.Name;
+            }
             return View();
         }
-
     }
 }

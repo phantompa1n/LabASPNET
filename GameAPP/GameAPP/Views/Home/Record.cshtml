@@ -1,18 +1,83 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Record";
 }
-
-<div class="recordContainer">
-        <p>
-            На поле будут перемешаны фрагменты картинки. Один фрагмент будет пустым. Нажатием на клетку,
-            расположенной рядом (сверху, снизу, справа, слева) с пустой, поменяет их местами. Для победы требуется
-            расставить все фрагменты на свои места. И сделать это за как можно меньшее количество ходов.
-            Лучший счёт будет записан в таблицу рекордов.
-        </p>
-        <p>
-            Пример выигрыша:
-        </p>
-        <img id="exampleWin" src="~/Content/Images/Others/example_win.png">
+@using GameAPP.Models
+<div class="menuRecordContainer">
+    <p style="text-align:center">Рекорды</p>
+    @using (Html.BeginForm("GetRecord", "Home", FormMethod.Post))
+    {
+                    <button type="submit" name="action" value="3">
+                        3x3
+                    </button>
+                    <button type="submit" name="action" value="4">
+                        4x4
+                    </button>
+                    <button type="submit" name="action" value="5">
+                        5x5
+                    </button>
+    }
 </div>
 
+
+@functions
+{
+    string[] getRecords(int size)
+    {
+        string records = null;
+        foreach (var k in ViewBag.Records)
+        {
+            if (k.Size_field == size)
+            {
+                IEnumerable<dynamic> players = ViewBag.Players;
+                records += players.FirstOrDefault(p => p.Id == k.Player_id).Login + "   " + k.Step_count + "\n"; // подумать над возвращением информации
+            }
+        }
+        string[] allRecords = records.Split('\n');
+        return allRecords;
+    }
+}
+
+@helper outputRecords(int size)
+{
+    string[] allRecords = getRecords(size);
+    foreach (string k in allRecords)
+    {
+        <td>allRecords</td>
+    }
+}
+
+@*@section Scripts
+    {
+    <script type="text/javascript">
+        function outputRecords(size)
+        {
+            var table = document.getElementById('recordTable');
+            console.log(table);
+            table.firstElementChild.appendChild('@getRecords(4)');
+        }
+    </script>
+    }*@
+
+@*<table id="recordTable" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>456</td>
+    </tr>
+    <tr>
+        <td id="11">
+            <button type="submit" name="action" value="3">
+                3x3
+            </button>
+        </td>
+        <td id="12">
+            <button type="submit" name="action" value="4">
+                4x4
+            </button>
+        </td>
+        <td id="13">
+            <button type="submit" name="action" value="5">
+                5x5
+            </button>
+        </td>
+    </tr>
+    }
+</table>*@

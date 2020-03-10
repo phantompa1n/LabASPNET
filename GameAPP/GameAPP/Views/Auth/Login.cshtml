@@ -1,0 +1,38 @@
+﻿@model GameAPP.Models.LoginModel
+
+@{
+    ViewBag.Title = "Авторизация";
+}
+
+    <div class="AuthContainer">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            if (ViewBag.message != "" && ViewBag.message != null)
+            {
+                <p id="message" style="text-align:center;color:red">@ViewBag.message</p>
+            }
+            <div class="group">
+                <input type="text" id="Login" name="Login" maxlength="15" required onclick="hideMessage()">
+                <span class="highlight" data-valmsg-for="Login" data-valmsg-replace="true"></span>
+                <span class="bar"></span>
+                <label>Введите логин</label>
+            </div>
+
+            <div class="group">
+                <input type="password" id="Password" name="Password" maxlength="50" required onclick="hideMessage()">
+                <span class="highlight" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                <span class="bar"></span>
+                <label>Введите пароль</label>
+            </div>
+
+            <div class="submit">
+                <input type="submit" class="confirm" value="Войти" />
+            </div>
+            <button id="reg" onclick="document.location='@Url.Action("Register", "Auth")'">
+                Зарегестрироваться
+            </button>
+        }
+    </div>
+
+@Scripts.Render("~/Scripts/HideMessage.js")

@@ -4,7 +4,7 @@
 }
 
     <div class="mainContainer">
-        <p id="authorizedLogin">Добро пожаловать: qwertyuio @ViewBag.login</p>
+        <p id="authorizedLogin">Добро пожаловать: @ViewBag.login</p>
         <img src="~/Content/Images/пятнашки.png" sizes="20%">
 
         <button id="play" onclick="document.location='@Url.Action("ChooseDifficult")'">
@@ -19,7 +19,7 @@
             Правила
         </button>
 
-        <button id="exit" onclick="document.location='@Url.Action("Index")'">
+        <button id="exit" onclick="document.location='@Url.Action("Logoff", "Auth")'">
             Выход
         </button>
 

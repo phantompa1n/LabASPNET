@@ -1,10 +1,10 @@
-﻿@using  GameAPP.Controllers
+﻿@using GameAPP.Controllers
 @{
     ViewBag.Title = "Field";
 }
 
     <div class="gameContainer">
-        <table id ="field" cellspacing="0" cellpadding="0">
+        <table id="field" cellspacing="0" cellpadding="0">
             @{
                 int s = 1;
                 string numberCars = Convert.ToString(HomeController.getRandomCars());
@@ -36,13 +36,16 @@
         <div class="counterContainer">
             <p id="inputCount">Cделано ходов: 0</p>
         </div>
+        <div class="showCarContainer">
+            <p class="open">Показать картинку</p>
+        </div>
     </div>
 
 
 
 @section Scripts
 {
-<script type="text/javascript">
+    <script type="text/javascript">
     var score = 0;
     function move_cell(event) {
         var clickedCell = event.target.parentElement;
@@ -67,12 +70,13 @@
             //EmptyCells[0].removeChild(imgEmptyCell);
             //clickedCell.removeChild(img);
             var pole = document.getElementsByClassName("carsImg"); // получаем поле, т.е все картинки
-            console.log(checkWin(pole));
-            if (checkWin(pole))
+            if (checkWin(pole)) {
                 win();
+                SendPost(score);
+            }
         }
     }
-            
+
     function OnClick(size, clickButton, voidButton)//размер поля, нажатая ячейка, ячейка с пустой клеткой
     {
         var pole = [parseInt(clickButton) - parseInt(size), parseInt(clickButton) + parseInt(size), parseInt(clickButton) - parseInt(1), parseInt(clickButton) + parseInt(1)];
@@ -89,7 +93,17 @@
         return false;
      }
 
-    
+
+    function SendPost(score) // отправляем рекорд на сервер
+    {
+        var formData = new FormData(document.forms.person);
+        formData.append("record", score);
+        formData.append("size", @ViewBag.size);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "Field");
+        xhr.send(formData);
+    }
+
     function checkWin(pole)
     {
         for (let i = 0; i < pole.length; i++)
@@ -99,6 +113,7 @@
         }
         return true;
     }
+
 
     function win()
     {
@@ -121,8 +136,26 @@
         exitButton.id = 'mainMenu';
         var controlDiv = document.getElementsByClassName("counterContainer");
         controlDiv[0].appendChild(exitButton);
+        var popUpContainer = document.getElementsByClassName("POPUPImg");
+        popUpContainer[0].parentNode.removeChild(popUpContainer[0]);
+        var linkImg = document.getElementsByClassName("open");
+        linkImg[0].parentNode.removeChild(linkImg[0]);
     }
-
-
     </script>
 }
+
+
+
+
+<div class="POPUPImg">
+    <div class="backpopup"></div>
+    <div class="popup-window">
+        <p class="close">x</p>
+        @{ 
+        string pathCars = "/Content/Images/FullCars/" + @numberCars + ".png";
+        <img src=@pathCars>
+        }
+    </div>
+</div>
+
+@Scripts.Render("~/Scripts/ShowPOPUP.js")

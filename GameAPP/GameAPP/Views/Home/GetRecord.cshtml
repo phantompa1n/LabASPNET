@@ -1,0 +1,34 @@
+﻿@model List<string>
+
+@{
+    ViewBag.Title = "Records:" + ViewBag.size;
+}
+
+@{
+    <div class="recordContainer recordContainer-1">
+        <p>Размер поля: @ViewBag.size</p>
+        @if (Model == null)
+        {
+            <div class="cellsRecord">На данный момент рекордов нету!</div>
+        }
+        else
+        {
+            foreach (string k in Model)
+            {
+                if (k == "")
+                {
+                    continue;
+                }
+                <div class="cellsRecord">@k ходов!</div>
+            }
+        }
+        @*<table id="recordTable" cellspacing="0" cellpadding="0">
+            @foreach (string k in Model)
+            {
+                <tr><td>@k ходов!</td></tr>
+            }
+        </table>*@
+
+    </div>
+}
+
