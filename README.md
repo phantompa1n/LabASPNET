@@ -32,4 +32,4 @@
 расставить все фрагменты на свои места. И сделать это за как можно меньшее количество ходов.
 Лучший счёт будет записан в таблицу рекордов.
 
-![Image alt](https://github.com/{sub13}/{LabASPNET}/raw/{master}/{Images}/screenshot_field.png)
+![Screenshot](Images/screenshot_field.png)
